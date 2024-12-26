@@ -7,141 +7,111 @@
     <style>
         /* General Styling */
         body {
-            background-color: black;
-            color: limegreen;
-            font-family: 'Courier New', Courier, monospace;
             margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
             overflow: hidden;
         }
 
         h1 {
-            text-align: center;
-            margin: 20px 0;
-            color: red;
-            animation: flicker 2s infinite;
+            font-size: 3em;
+            margin-top: 50px;
+            text-shadow: 0 0 20px #ffffff, 0 0 30px #00ff00;
+            animation: glow 2s infinite alternate;
         }
 
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .session-id {
-            font-size: 18px;
-            margin: 20px 0;
-            color: limegreen;
-            animation: typing 3s steps(20, end) infinite;
+        .qr-container {
+            margin-top: 50px;
         }
 
         .qr-code {
             width: 250px;
             height: 250px;
-            margin: 20px auto;
-            border: 2px solid limegreen;
-            background: radial-gradient(circle, limegreen, black);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: rotateQR 6s linear infinite;
+            background: #fff;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7), 0 0 40px rgba(0, 255, 0, 0.4);
         }
 
-        .qr-code img {
-            width: 80%;
-            height: 80%;
-            border-radius: 10px;
-            box-shadow: 0 0 20px limegreen;
-        }
-
-        .button {
+        .session-id {
             margin-top: 20px;
+            font-size: 1.5em;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            animation: fadeIn 2s ease-in-out;
         }
 
-        .button button {
-            background: limegreen;
-            color: black;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .button button:hover {
-            background: red;
-            color: limegreen;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px red, 0 0 20px limegreen;
+        /* Background animation */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://source.unsplash.com/1920x1080/?cyberpunk') no-repeat center center/cover;
+            filter: blur(5px);
+            animation: zoom 20s infinite alternate;
         }
 
         /* Animations */
-        @keyframes rotateQR {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes typing {
+        @keyframes glow {
             from {
-                width: 0;
+                text-shadow: 0 0 20px #ffffff, 0 0 30px #00ff00;
             }
             to {
-                width: 100%;
+                text-shadow: 0 0 30px #ffffff, 0 0 50px #00ff00;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
             }
         }
     </style>
 </head>
 <body>
-    <h1>Fenix Md Bot Pairing</h1>
-    <div class="container">
-        <div class="session-id" id="sessionId">
-            Session ID: Generating...
-        </div>
+    <h1>Fenix Md</h1>
+    <div class="qr-container">
         <div class="qr-code">
-            <img src="https://via.placeholder.com/200" alt="QR Code">
+            <img src="https://via.placeholder.com/250" alt="QR Code" style="width: 100%; height: 100%; border-radius: 15px;">
         </div>
-        <div class="button">
-            <button onclick="pairFenix()">Pair Fenix Md</button>
+        <div class="session-id" id="sessionId">
+            Generating Session ID...
         </div>
     </div>
 
     <script>
-        // Generate a mock session ID
+        // Generate a formatted session ID
         function generateSessionId() {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let sessionId = '';
-            for (let i = 0; i < 16; i++) {
+            let sessionId = 'FenixMD=';
+            for (let i = 0; i < 10; i++) {
                 sessionId += characters.charAt(Math.floor(Math.random() * characters.length));
             }
             return sessionId;
         }
 
-        // Display the session ID dynamically
+        // Set the session ID dynamically after a delay
         const sessionIdElement = document.getElementById('sessionId');
-        let sessionId = generateSessionId();
         setTimeout(() => {
-            sessionIdElement.textContent = `Session ID: ${sessionId}`;
+            sessionIdElement.textContent = generateSessionId();
         }, 2000);
-
-        // Pairing Function
-        function pairFenix() {
-            alert(`Fenix Md successfully paired!\nSession ID: ${sessionId}`);
-        }
     </script>
 </body>
 </html>
