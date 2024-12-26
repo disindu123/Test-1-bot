@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenix Md Bot Pairing</title>
+    <style>
+        /* General Styling */
+        body {
+            background-color: black;
+            color: limegreen;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: red;
+            animation: flicker 2s infinite;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .session-id {
+            font-size: 18px;
+            margin: 20px 0;
+            color: limegreen;
+            animation: typing 3s steps(20, end) infinite;
+        }
+
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+            border: 2px solid limegreen;
+            background: radial-gradient(circle, limegreen, black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: rotateQR 6s linear infinite;
+        }
+
+        .qr-code img {
+            width: 80%;
+            height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px limegreen;
+        }
+
+        .button {
+            margin-top: 20px;
+        }
+
+        .button button {
+            background: limegreen;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .button button:hover {
+            background: red;
+            color: limegreen;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px red, 0 0 20px limegreen;
+        }
+
+        /* Animations */
+        @keyframes rotateQR {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Fenix Md Bot Pairing</h1>
+    <div class="container">
+        <div class="session-id" id="sessionId">
+            Session ID: Generating...
+        </div>
+        <div class="qr-code">
+            <img src="https://via.placeholder.com/200" alt="QR Code">
+        </div>
+        <div class="button">
+            <button onclick="pairFenix()">Pair Fenix Md</button>
+        </div>
+    </div>
+
+    <script>
+        // Generate a mock session ID
+        function generateSessionId() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let sessionId = '';
+            for (let i = 0; i < 16; i++) {
+                sessionId += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return sessionId;
+        }
+
+        // Display the session ID dynamically
+        const sessionIdElement = document.getElementById('sessionId');
+        let sessionId = generateSessionId();
+        setTimeout(() => {
+            sessionIdElement.textContent = `Session ID: ${sessionId}`;
+        }, 2000);
+
+        // Pairing Function
+        function pairFenix() {
+            alert(`Fenix Md successfully paired!\nSession ID: ${sessionId}`);
+        }
+    </script>
+</body>
+</html>
